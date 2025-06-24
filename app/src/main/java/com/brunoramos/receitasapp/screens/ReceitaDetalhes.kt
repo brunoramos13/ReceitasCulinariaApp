@@ -8,15 +8,38 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import androidx.compose.ui.layout.ContentScale
 import com.brunoramos.receitasapp.models.Receita
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 
 @Composable
-fun ReceitaDetalhes(receita: Receita, onBack: () -> Unit) {
+fun ReceitaDetalhes(
+    receita: Receita,
+    onBack: () -> Unit,
+    onFavoritoClick: (Receita) -> Unit,
+    isFavorito: Boolean
+) {
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(16.dp)) {
 
-        Button(onClick = onBack) {
-            Text("Voltar")
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(onClick = onBack) {
+                Text("Voltar")
+            }
+
+            IconButton(onClick = { onFavoritoClick(receita) }) {
+                Icon(
+                    imageVector = if (isFavorito) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+                    contentDescription = "Favoritar",
+                    tint = if (isFavorito) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onBackground
+                )
+            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -44,3 +67,4 @@ fun ReceitaDetalhes(receita: Receita, onBack: () -> Unit) {
         }
     }
 }
+

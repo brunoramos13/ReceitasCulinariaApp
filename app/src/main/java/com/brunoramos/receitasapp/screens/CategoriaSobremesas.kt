@@ -21,7 +21,7 @@ fun CategoriaSobremesas(
         Receita(
             nome = "Pastel de Nata",
             descricao = "Deliciosos pastéis com creme e massa folhada.",
-            imagemUrl = "hhttps://www.pingodoce.pt/wp-content/uploads/2015/10/pastel-de-nata.jpg",
+            imagemUrl = "https://www.unileverfoodsolutions.pt/dam/global-ufs/mcos/portugal/calcmenu/recipes/PT-recipes/2021/menu-do-dia/pastel-nata-cafe-main-header.jpg",
             passos = listOf(
                 "Pré-aquecer o forno.",
                 "Preparar o creme com ovos, açúcar e natas.",

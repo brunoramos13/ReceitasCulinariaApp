@@ -11,7 +11,8 @@ import androidx.compose.ui.unit.dp
 fun MainMenu(
     onPeixeClick: () -> Unit,
     onCarneClick: () -> Unit,
-    onSobremesasClick: () -> Unit
+    onSobremesasClick: () -> Unit,
+    onFavoritosClick: () -> Unit
 ) {
     Column(
         modifier = Modifier.fillMaxSize().padding(24.dp),
@@ -28,6 +29,9 @@ fun MainMenu(
         }
         Button(onClick = onSobremesasClick) {
             Text("Sobremesas")
+        }
+        Button(onClick = onFavoritosClick) {
+            Text("Favoritos ⭐")
         }
     }
 }
