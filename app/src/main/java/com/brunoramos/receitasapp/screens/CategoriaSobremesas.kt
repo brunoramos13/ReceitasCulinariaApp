@@ -11,6 +11,7 @@ import androidx.compose.ui.layout.ContentScale
 import coil.compose.AsyncImage
 import com.brunoramos.receitasapp.models.Receita
 import androidx.compose.foundation.clickable
+import androidx.compose.ui.Alignment
 
 @Composable
 fun CategoriaSobremesas(
@@ -50,7 +51,12 @@ fun CategoriaSobremesas(
     }
 
     Column {
-        Button(onClick = onBack, modifier = Modifier.padding(8.dp)) {
+        Button(
+            onClick = onBack,
+            modifier = Modifier
+                .padding(8.dp)
+                .align(Alignment.CenterHorizontally)
+        ) {
             Text("Voltar")
         }
 
