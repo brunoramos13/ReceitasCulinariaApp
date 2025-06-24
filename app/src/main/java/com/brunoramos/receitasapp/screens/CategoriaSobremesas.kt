@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
@@ -17,6 +17,9 @@ fun CategoriaSobremesas(
     onBack: () -> Unit,
     onReceitaClick: (Receita) -> Unit
 ) {
+
+    var pesquisa by remember { mutableStateOf("") }
+
     val receitasSobremesas = listOf(
         Receita(
             nome = "Pastel de Nata",
@@ -42,13 +45,27 @@ fun CategoriaSobremesas(
         )
     )
 
+    val receitasFiltradas = receitasSobremesas.filter {
+        it.nome.contains(pesquisa, ignoreCase = true)
+    }
+
     Column {
         Button(onClick = onBack, modifier = Modifier.padding(8.dp)) {
             Text("Voltar")
         }
 
+        TextField(
+            value = pesquisa,
+            onValueChange = { pesquisa = it },
+            label = { Text("Pesquisar sobremesa") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            singleLine = true
+        )
+
         LazyColumn {
-            items(receitasSobremesas) { receita ->
+            items(receitasFiltradas) { receita ->
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

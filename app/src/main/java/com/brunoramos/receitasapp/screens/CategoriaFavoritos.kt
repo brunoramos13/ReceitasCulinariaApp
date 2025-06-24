@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
@@ -18,16 +18,32 @@ fun CategoriaFavoritos(
     onBack: () -> Unit,
     onReceitaClick: (Receita) -> Unit
 ) {
+    var pesquisa by remember { mutableStateOf("") }
+
+    val favoritosFiltrados = favoritos.filter {
+        it.nome.contains(pesquisa, ignoreCase = true)
+    }
+
     Column {
         Button(onClick = onBack, modifier = Modifier.padding(8.dp)) {
             Text("Voltar")
         }
 
-        if (favoritos.isEmpty()) {
-            Text("Ainda não há receitas favoritas.", modifier = Modifier.padding(16.dp))
+        TextField(
+            value = pesquisa,
+            onValueChange = { pesquisa = it },
+            label = { Text("Pesquisar favorito") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 8.dp, vertical = 4.dp),
+            singleLine = true
+        )
+
+        if (favoritosFiltrados.isEmpty()) {
+            Text("Nenhuma receita favorita encontrada.", modifier = Modifier.padding(16.dp))
         } else {
             LazyColumn {
-                items(favoritos) { receita ->
+                items(favoritosFiltrados) { receita ->
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
